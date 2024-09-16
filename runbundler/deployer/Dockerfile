@@ -6,9 +6,11 @@ ENV PATH=$PATH:./node_modules/.bin
 RUN yarn global add node-gyp
 RUN yarn && hardhat compile
 
-FROM ghcr.io/foundry-rs/foundry:latest
+FROM ghcr.io/foundry-rs/foundry:stable
 
-RUN apk add jq
+USER root
+RUN apt-get update && apt-get install -y jq
+
 # RUN apk add nodejs yarn jq perl
 # RUN echo 'sh "$@"' > /bin/bash && chmod a+rx /bin/bash
 # RUN git clone http://github.com/eth-infinitism/account-abstraction.git -b v0.7.0
