@@ -1,7 +1,8 @@
-FROM accountabstraction/foundry-legacy-0.2
-#latest foundry image doesn't support "apk" 
-RUN apk add --no-cache jq
+FROM ghcr.io/foundry-rs/foundry:stable
+
+USER root
+RUN apt-get update && apt-get install -y jq
 
 ADD funder.sh /
 #RUN chmod a+rx /funder.sh
-ENTRYPOINT  [ "/funder.sh"  ]
+ENTRYPOINT  ["/funder.sh"] 
