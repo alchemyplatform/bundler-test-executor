@@ -1,8 +1,7 @@
 # docker-compose to bring up a single bundler, with all needed services
-version: '3'
+version: "3"
 
 services:
-
   funder:
     build: ./runbundler/funder
     environment:
@@ -30,9 +29,9 @@ services:
   eth-node:
     extends:
       file: $ETH_NODE_YML
-      service: eth-node 
+      service: eth-node
 
-  bundler: 
+  bundler:
     extends:
       file: $BUNDLER_YML
       service: bundler
@@ -51,7 +50,7 @@ services:
         condition: service_completed_successfully
 
   wait-all:
-    image: ghcr.io/foundry-rs/foundry@sha256:09143a1c5ad22ae6b5fbb3d9ac39a5e0cff6be425836e4f1715dc0e204f9899f
+    image: FROM ghcr.io/foundry-rs/foundry:v0.3.0
     command: echo started
     depends_on:
       bundler:
@@ -71,4 +70,3 @@ services:
   #   depends_on:
   #     wait-all:
   #       condition: service_completed_successfully
-
